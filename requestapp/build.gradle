@@ -1,0 +1,18 @@
+plugins {
+    id 'java-library'
+}
+
+description = 'requestapp'
+
+dependencies {
+    implementation 'org.springframework:spring-context'
+    implementation 'org.springframework:spring-tx'
+
+    compileOnly 'org.projectlombok:lombok:1.18.46'
+    annotationProcessor 'org.projectlombok:lombok:1.18.46'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    testImplementation 'com.tngtech.archunit:archunit:1.5.0'
+}

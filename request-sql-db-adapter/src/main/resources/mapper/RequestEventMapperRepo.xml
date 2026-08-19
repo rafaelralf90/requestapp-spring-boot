@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="it.raffaele.esposito.requestapp.adapter.out.repository.sqldb.repo.mybatis.RequestEventMapperRepo">
+
+    <resultMap id="RequestEventResultMap" type="it.raffaele.esposito.requestapp.adapter.out.repository.sqldb.entity.RequestEventEntity">
+        <id property="id" column="id"/>
+
+        <result property="requestUuid" column="request_uuid"/>
+        <result property="eventType" column="event_type"/>
+        <result property="fromStatus" column="from_status"/>
+        <result property="toStatus" column="to_status"/>
+        <result property="reason" column="reason"/>
+        <result property="publishedRequestUuid" column="published_request_uuid"/>
+        <result property="decidedOnVersion" column="decided_on_version"/>
+        <result property="occurredAt" column="occurred_at"/>
+        <result property="publishedAt" column="published_at"/>
+    </resultMap>
+
+    <insert id="append" parameterType="it.raffaele.esposito.requestapp.adapter.out.repository.sqldb.entity.RequestEventEntity"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO request_event (request_uuid, event_type, from_status, to_status, reason,
+                                   published_request_uuid, decided_on_version, occurred_at, published_at)
+        VALUES (#{requestUuid}, #{eventType}, #{fromStatus}, #{toStatus}, #{reason},
+                #{publishedRequestUuid}, #{decidedOnVersion}, #{occurredAt}, #{publishedAt})
+    </insert>
+
+    <select id="findEventsByRequestId" resultMap="RequestEventResultMap">
+        SELECT id, request_uuid, event_type, from_status, to_status, reason,
+               published_request_uuid, decided_on_version, occurred_at, published_at
+        FROM request_event
+        WHERE request_uuid = #{requestId}
+        ORDER BY id
+    </select>
+
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet author="raffaeleesposito" id="create-request-table">
+        <createTable tableName="request">
+            <column name="uuid" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="body" type="VARCHAR(4000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="published_request_uuid" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created_at" type="DATETIME(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reason" type="VARCHAR(4000)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="disabled_date" type="DATETIME(6)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="version" type="BIGINT" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createIndex tableName="request" indexName="idx_request_published_request_uuid" unique="true">
+            <column name="published_request_uuid"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

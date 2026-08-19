@@ -1,0 +1,6 @@
+rootProject.name = 'requestapp-spring-boot'
+
+include 'requestapp'
+include 'request-sql-db-adapter'
+include 'requestapp-rest-adapter'
+include 'requestapp-webapp'

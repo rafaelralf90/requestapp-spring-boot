@@ -1,0 +1,21 @@
+plugins {
+    id 'java-library'
+}
+
+description = 'requestapp-rest-adapter'
+
+dependencies {
+
+    implementation(project(':requestapp'))
+    implementation('org.springframework:spring-web')
+    implementation('org.springframework:spring-webmvc')
+    implementation('org.springframework:spring-core')
+    implementation 'org.slf4j:slf4j-api'
+
+    compileOnly 'org.projectlombok:lombok:1.18.46'
+    annotationProcessor 'org.projectlombok:lombok:1.18.46'
+    compileOnly platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+    compileOnly('jakarta.servlet:jakarta.servlet-api')
+    runtimeOnly('org.springframework.boot:spring-boot-starter-web')
+    runtimeOnly('org.springframework.boot:spring-boot-starter-actuator')
+}

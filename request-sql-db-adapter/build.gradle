@@ -1,0 +1,26 @@
+plugins {
+    id 'java-library'
+}
+
+description = 'request-sql-db-adapter'
+
+dependencies {
+    implementation project(':requestapp')
+
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+    implementation 'org.springframework:spring-context'
+    implementation 'org.springframework:spring-tx'
+    implementation 'org.mybatis:mybatis:3.5.14'
+    implementation 'org.slf4j:slf4j-api'
+
+    compileOnly 'org.projectlombok:lombok:1.18.46'
+    annotationProcessor 'org.projectlombok:lombok:1.18.46'
+    runtimeOnly('org.liquibase:liquibase-core')
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    testRuntimeOnly 'org.springframework.boot:spring-boot-autoconfigure'
+    testRuntimeOnly 'com.h2database:h2'
+
+}

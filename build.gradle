@@ -1,0 +1,37 @@
+buildscript {
+    ext {
+        springBootVersion = '3.2.12'
+    }
+}
+
+plugins {
+    id 'com.autonomousapps.dependency-analysis' version '2.19.0'
+}
+
+description = 'requestapp'
+
+allprojects {
+
+    apply plugin: 'java'
+    apply plugin: 'com.autonomousapps.dependency-analysis'
+
+    version='1.0-SNAPSHOT'
+    group='com.raffaele.esposito'
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}

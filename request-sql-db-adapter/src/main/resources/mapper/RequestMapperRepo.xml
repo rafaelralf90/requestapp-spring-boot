@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="it.raffaele.esposito.requestapp.adapter.out.repository.sqldb.repo.mybatis.RequestMapperRepo">
+
+    <resultMap id="RequestResultMap" type="it.raffaele.esposito.requestapp.adapter.out.repository.sqldb.entity.RequestEntity">
+        <id property="uuid" column="uuid"/>
+
+        <result property="name" column="name"/>
+        <result property="body" column="body"/>
+        <result property="status" column="status"/>
+        <result property="publishedRequestUuid" column="published_request_uuid"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="disabledDate" column="disabled_date"/>
+        <result property="reason" column="reason"/>
+        <result property="version" column="version"/>
+    </resultMap>
+
+    <select id="findRequestById" resultMap="RequestResultMap">
+        SELECT uuid, name, body, status, published_request_uuid, created_at, disabled_date, reason, version
+        FROM request
+        WHERE uuid = #{requestId}
+        <if test="excludeDeleted">
+            AND status != 'DELETED'
+        </if>
+    </select>
+
+    <insert id="save" parameterType="it.raffaele.esposito.requestapp.adapter.out.repository.sqldb.entity.RequestEntity">
+        INSERT INTO request (uuid, name, body, status, published_request_uuid, created_at, disabled_date, reason, version)
+        VALUES (#{uuid}, #{name}, #{body}, #{status}, #{publishedRequestUuid}, #{createdAt}, #{disabledDate}, #{reason}, #{version})
+    </insert>
+
+    <update id="update" parameterType="it.raffaele.esposito.requestapp.adapter.out.repository.sqldb.entity.RequestEntity">
+        UPDATE request
+        SET
+        name = #{name},
+        body = #{body},
+        status = #{status},
+        published_request_uuid = #{publishedRequestUuid},
+        created_at = #{createdAt},
+        disabled_date = #{disabledDate},
+        reason = #{reason},
+        version = #{version} + 1
+        WHERE uuid = #{uuid}
+        AND version = #{version}
+    </update>
+
+</mapper>

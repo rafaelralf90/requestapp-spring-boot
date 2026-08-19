@@ -1,0 +1,24 @@
+plugins {
+    id 'org.springframework.boot' version "${springBootVersion}"
+}
+
+version='1.0'
+description = 'requestapp-webapp'
+
+dependencies {
+
+    runtimeOnly(project(':requestapp-rest-adapter'))
+    runtimeOnly(project(':request-sql-db-adapter'))
+    runtimeOnly('org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0')
+    implementation('org.springframework.boot:spring-boot-autoconfigure')
+    implementation('org.springframework.boot:spring-boot')
+    implementation('org.springframework:spring-context')
+
+    testImplementation(project(':requestapp'))
+    testImplementation 'org.springframework:spring-jdbc'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.rest-assured:rest-assured:5.4.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    runtimeOnly 'com.h2database:h2'
+}
